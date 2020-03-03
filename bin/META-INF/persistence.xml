@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<!-- unidade de persistencia com o nome financas -->
+	<persistence-unit name="financas">
+
+		<!-- Implementação do JPA, no nosso caso Hibernate -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Aqui são listadas todas as entidades -->
+		<class>br.com.totustuus.financas.model.Conta</class>
+
+		<properties>
+
+			<!-- Propriedades JDBC -->
+			<property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" /> <!-- DB Driver -->
+
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/financas" /> <!-- BD Mane -->
+
+			<property name="javax.persistence.jdbc.user"
+				value="usuarioteste" />
+			<property name="javax.persistence.jdbc.password"
+				value="teste123" />
+
+			<!-- Configurações específicas do Hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" /> <!-- DB Dialect -->
+
+				<!-- 
+			
+				Quando colocamos o valor dessa propriedade como update significa 
+				que qualquer alteração incremental nas nossas classes de modelo (ou a criação 
+				de novas classes) também ocorrerão nas tabelas quando utilizarmos novamente 
+				a JPA. Isso significa que ao criarmos uma nova classe ou inserirmos um novo 
+				campo em alguma entidade, o provider usado irá fazer as alterações no banco 
+				de dados. 
+				
+				É importante que, ao utilizarmos essa estratégia, façamos varreduras 
+				periódicas no banco para eliminar campos e tabelas não mais usadas. Quando 
+				queremos sempre um banco limpo ao iniciar a aplicação podemos utilizar a 
+				estratégia create que permite com que o provider remova todos os dados do 
+				banco e crie as tabelas baseando-se nos seus modelos.
+				
+				É possível deletarmos todos os dados do banco ao terminarmos o 
+				EntityManagerFactory (ou SessionFactory caso esteja usando Hibernate 
+				sem JPA), basta usarmos a estratégia create-drop.
+				
+				Por último podemos desabilitar totalmente o Hibernate 
+				Mapping usando a estratégia none.
+				
+				-->
+				
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->
+
+			<property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+			<property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+
+
+		</properties>
+	</persistence-unit>
+</persistence>
