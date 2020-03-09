@@ -12,6 +12,7 @@
 
 		<!-- Aqui são listadas todas as entidades -->
 		<class>br.com.totustuus.financas.model.Conta</class>
+		<class>br.com.totustuus.financas.model.Movimentacao</class>
 
 		<properties>
 
