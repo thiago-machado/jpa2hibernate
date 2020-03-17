@@ -1,4 +1,4 @@
-package br.com.totustuus.financas.main;
+package br.com.totustuus.financas.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -12,12 +12,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.totustuus.financas.main.Categoria;
+/*
+ * O JPA traz um recurso que nos fornece uma maneira diferente de organizar as consultas, 
+ * denominado Named Query, o qual permite justamente declararmos uma query identificando-a 
+ * com um nome e, depois, referenciá-la quando formos utilizá-la.
+ * 
+ * Na classe Movimentacao usaremos a anotação @NamedQuery, passando a 
+ * mesma query utilizada no método getMediasPorDiaETipo de MovimentacaoDAO.
+ * 
+ * O interessante nisso tudo é que o SELECT é processado pelo Hibernate assim que 
+ * ele é iniciado. 
+ * Caso façamos alguma alteração no modelo sem replicá-la na query, 
+ * seremos avisados de antemão.
 
+ */
 @Entity
+@NamedQuery(query = "SELECT DISTINCT AVG(m.valor) FROM Movimentacao m "
+		+ "WHERE m.conta = :pConta AND m.tipoMovimentacao = :pTipoMovimentacao GROUP BY DAY(m.data)", 
+		name = "MediasPorDiaETipo")
 public class Movimentacao {
 
 	@Id
@@ -43,9 +59,8 @@ public class Movimentacao {
 	 * Devemos então anotar o atributo com @Temporal, depois definir o parâmetro de
 	 * precisão desejado (TemporalType). Aqui, temos três opções:
 	 * 
-	 * DATE: somente a data, sem a hora; 
-	 * TIME: somente a hora, sem data; 
-	 * TIMESTAMP: tanto data quanto hora.
+	 * DATE: somente a data, sem a hora; TIME: somente a hora, sem data; TIMESTAMP:
+	 * tanto data quanto hora.
 	 * 
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
@@ -132,6 +147,5 @@ public class Movimentacao {
 	public void setCategoria(List<Categoria> categoria) {
 		this.categoria = categoria;
 	}
-	
 
 }

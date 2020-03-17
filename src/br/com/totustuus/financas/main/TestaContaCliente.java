@@ -2,6 +2,7 @@ package br.com.totustuus.financas.main;
 
 import javax.persistence.EntityManager;
 
+import br.com.totustuus.financas.model.Cliente;
 import br.com.totustuus.financas.model.Conta;
 import br.com.totustuus.financas.util.JPAUtil;
 

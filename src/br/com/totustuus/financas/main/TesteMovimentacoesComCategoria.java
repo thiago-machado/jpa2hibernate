@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import javax.persistence.EntityManager;
 
+import br.com.totustuus.financas.model.Categoria;
 import br.com.totustuus.financas.model.Conta;
 import br.com.totustuus.financas.model.Movimentacao;
 import br.com.totustuus.financas.model.TipoMovimentacao;
